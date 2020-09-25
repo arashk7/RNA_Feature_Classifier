@@ -1,11 +1,9 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 import seaborn as sn
 import matplotlib.pyplot as plt
 import numpy as np
-
 import pandas as pd
 
 features1 = pd.read_csv('../Dataset/Sample1.csv')
@@ -14,8 +12,6 @@ features2 = pd.read_csv('../Dataset/Sample2.csv')
 features2.head()
 features = pd.concat([features1, features2])
 features.head()
-
-# features=features2
 # print(features)
 
 features = features.replace('mod', 0)
@@ -32,7 +28,11 @@ sc = MinMaxScaler(feature_range=(0,1))
 X = sc.fit_transform(X)
 
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, shuffle=True)
-clf = RandomForestClassifier(n_estimators=80)
+
+#Classifier
+from sklearn.linear_model import RidgeClassifier
+clf = RidgeClassifier()
+
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
 
@@ -40,4 +40,16 @@ confusion_matrix = pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['P
 sn.heatmap(confusion_matrix, annot=True)
 
 print('Accuracy: ', metrics.accuracy_score(y_test, y_pred))
+# plt.show()
+
+from sklearn.linear_model import RidgeClassifierCV
+clf = RidgeClassifierCV()
+
+clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+
+confusion_matrix = pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
+sn.heatmap(confusion_matrix, annot=True)
+
+print('Accuracy with CV: ', metrics.accuracy_score(y_test, y_pred))
 plt.show()

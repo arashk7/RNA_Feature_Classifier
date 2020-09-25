@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.neural_network import MLPClassifier
 from sklearn import metrics
 import seaborn as sn
 import matplotlib.pyplot as plt
@@ -14,9 +14,8 @@ features2 = pd.read_csv('../Dataset/Sample2.csv')
 features2.head()
 features = pd.concat([features1, features2])
 features.head()
-
-# features=features2
 # print(features)
+# features=features2
 
 features = features.replace('mod', 0)
 features = features.replace('unm', 1)
@@ -32,9 +31,9 @@ sc = MinMaxScaler(feature_range=(0,1))
 X = sc.fit_transform(X)
 
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, shuffle=True)
-clf = RandomForestClassifier(n_estimators=80)
-clf.fit(X_train, y_train)
-y_pred = clf.predict(X_test)
+NN = MLPClassifier(solver='lbfgs', alpha=1e-4, hidden_layer_sizes=(20, 10), random_state=0)
+NN.fit(X_train, y_train)
+y_pred = NN.predict(X_test)
 
 confusion_matrix = pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
 sn.heatmap(confusion_matrix, annot=True)

@@ -14,7 +14,6 @@ features2 = pd.read_csv('../Dataset/Sample2.csv')
 features2.head()
 features = pd.concat([features1, features2])
 features.head()
-# print(features)
 
 features = features.replace('mod', 0)
 features = features.replace('unm', 1)
