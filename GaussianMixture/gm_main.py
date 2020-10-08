@@ -2,11 +2,11 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
-import seaborn as sn
+# import seaborn as sn
 import matplotlib.pyplot as plt
 import numpy as np
 
-import pandas as pd
+
 
 features1 = pd.read_csv('../Dataset/Sample1.csv')
 features1.head()
@@ -32,13 +32,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, shuffl
 
 #Classifier
 from sklearn.mixture import gaussian_mixture
-clf = gaussian_mixture()
+clf = gaussian_mixture(2)
 
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
 
-confusion_matrix = pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
-sn.heatmap(confusion_matrix, annot=True)
+# confusion_matrix = pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
+# sn.heatmap(confusion_matrix, annot=True)
 
-print('Accuracy: ', metrics.accuracy_score(y_test, y_pred))
-plt.show()
+# print('Accuracy: ', metrics.accuracy_score(y_test, y_pred))
+# plt.show()
