@@ -14,6 +14,7 @@ features = pd.concat([features1, features2])
 features.head()
 # print(features)
 
+features= features2
 features = features.replace('mod', 0)
 features = features.replace('unm', 1)
 features = features.replace(np.nan, 0, regex=True)

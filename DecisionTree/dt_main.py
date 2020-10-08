@@ -15,7 +15,7 @@ features2.head()
 features = pd.concat([features1, features2])
 features.head()
 
-# features=features2
+
 
 features = features.replace('mod', 0)
 features = features.replace('unm', 1)

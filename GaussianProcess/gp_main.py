@@ -31,8 +31,8 @@ X = sc.fit_transform(X)
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, shuffle=True)
 
 #Classifier
-
-clf = BaggingClassifier(xtree, random_state=0)
+from sklearn.gaussian_process import GaussianProcessClassifier
+clf = GaussianProcessClassifier(random_state=0)
 
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
